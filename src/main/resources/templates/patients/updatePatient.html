@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Patient Management System</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+  <h1>Patient Management System</h1>
+  <hr>
+  <h2>Update Patient</h2>
+
+  <form th:action="@{/updatePatient/{id}(id=${patientForm.id})}" th:object="${patientForm}" method="post">
+
+    <input type="text" th:field="*{nom}" class="form-control mb-4 col-4">
+    <p th:errors="*{nom}" class="text-danger" th:if="${#fields.hasErrors('nom')}"></p>
+
+
+    <input type="text" th:field="*{prenom}" class="form-control mb-4 col-4">
+    <p th:errors="*{prenom}" class="text-danger" th:if="${#fields.hasErrors('prenom')}"></p>
+
+
+    <input type="text" th:field="*{genre}" class="form-control mb-4 col-4">
+    <p th:errors="*{genre}" class="text-danger" th:if="${#fields.hasErrors('genre')}"></p>
+
+
+    <input type="text" th:field="*{dateDeNaissance}" class="form-control mb-4 col-4">
+    <p th:errors="*{dateDeNaissance}" class="text-danger" th:if="${#fields.hasErrors('dateDeNaissance')}"></p>
+
+    <input type="text" th:field="*{adressePostale}" class="form-control mb-4 col-4">
+    <p th:errors="*{adressePostale}" class="text-danger" th:if="${#fields.hasErrors('adressePostale')}"></p>
+
+
+    <input type="text" th:field="*{numeroDeTelephone}" class="form-control mb-4 col-4">
+    <p th:errors="*{numeroDeTelephone}" class="text-danger" th:if="${#fields.hasErrors('numeroDeTelephone')}"></p>
+
+
+
+    <button type="submit" class="btn btn-info col-2"> Update Patient</button>
+  </form>
+
+  <hr>
+
+  <a th:href="@{/showPatientList}"> Back to Patient List</a>
+</div>
+</body>
+
+</html>

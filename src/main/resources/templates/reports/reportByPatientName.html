@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Liste des rapports</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+        body {
+            background-color: #e9ecef;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="mb-4 text-center">Recherche de rapports médicaux</h1>
+
+  <!-- Barre de recherche pour filtrer les rapports -->
+  <form th:action="@{/reports/by-name}" method="get" class="mb-3">
+    <div class="input-group mb-3">
+      <input type="text" name="name" class="form-control" placeholder="Nom du patient" required>
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">Chercher</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID Patient</th>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Genre</th>
+      <th>Date de Naissance</th>
+      <th>Âge</th>
+      <th>Risque</th>
+      <th>Déclencheurs</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Boucle pour afficher chaque rapport -->
+    <tr th:each="report : ${reports}">
+      <td th:text="${report.patientId}"></td>
+      <td th:text="${report.firstName}"></td>
+      <td th:text="${report.lastName}"></td>
+      <td th:text="${report.gender}"></td>
+      <td th:text="${report.birthdate}"></td>
+      <td th:text="${report.age}"></td>
+      <td th:text="${report.risk}"></td>
+      <td>
+        <ul>
+          <li th:each="trigger : ${report.triggers}" th:text="${trigger}"></li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Message en cas d'absence de rapports -->
+  <div th:if="${#lists.isEmpty(reports)}" class="alert alert-warning">
+    Aucun rapport trouvé pour le nom fourni.
+  </div>
+
+</div>
+
+</body>
+</html>

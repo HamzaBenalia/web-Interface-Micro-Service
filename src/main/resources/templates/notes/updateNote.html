@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Note Management System</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h1>Note Management System</h1>
+    <hr>
+    <h2>Update Note</h2>
+
+    <form th:action="@{/updateNote/{id}(id=${noteForm.id})}" th:object="${noteForm}" method="Post">
+
+
+        <input type="text" th:field="*{id}" class="form-control mb-4 col-4">
+        <p th:errors="*{id}" class="text-danger" th:if="${#fields.hasErrors('id')}"></p>
+
+
+        <input type="text" th:field="*{patientId}" class="form-control mb-4 col-4">
+        <p th:errors="*{patientId}" class="text-danger" th:if="${#fields.hasErrors('patientId')}"></p>
+
+
+        <input type="text" th:field="*{content}" class="form-control mb-4 col-4">
+        <p th:errors="*{content}" class="text-danger" th:if="${#fields.hasErrors('content')}"></p>
+
+
+        <button type="submit" class="btn btn-info col-2"> Update Note</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/showNoteList}"> Back to note List</a>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BidList Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        input[type="text"], button {
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:hover, button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <div th:insert="fragments/header :: header"></div>
+    <hr>
+    <h2 class="text-center mb-4">Save patient</h2>
+
+    <form action="#" th:action="@{/savePatient}" th:object="${patientForm}" method="POST">
+
+        <input type="text" th:field="*{nom}" placeholder="Nom" class="form-control mb-4 col-4">
+        <p th:errors="*{nom}" class="text-danger" th:if="${#fields.hasErrors('nom')}"></p>
+
+        <input type="text" th:field="*{prenom}" placeholder="Prénom" class="form-control mb-4 col-4">
+        <p th:errors="*{prenom}" class="text-danger" th:if="${#fields.hasErrors('prenom')}"></p>
+
+        <input type="text" th:field="*{genre}" placeholder="Genre" class="form-control mb-4 col-4">
+        <p th:errors="*{genre}" class="text-danger" th:if="${#fields.hasErrors('genre')}"></p>
+
+        <input type="text" th:field="*{dateDeNaissance}" placeholder="Date de naissance (jj/MM/yyyy)" class="form-control mb-4 col-4">
+        <p th:errors="*{dateDeNaissance}" class="text-danger" th:if="${#fields.hasErrors('dateDeNaissance')}"></p>
+
+        <input type="text" th:field="*{numeroDeTelephone}" placeholder="Numero de téléphone" class="form-control mb-4 col-4">
+        <p th:errors="*{numeroDeTelephone}" class="text-danger" th:if="${#fields.hasErrors('numeroDeTelephone')}"></p>
+
+        <input type="text" th:field="*{adressePostale}" placeholder="Adresse postale" class="form-control mb-4 col-4">
+        <p th:errors="*{adressePostale}" class="text-danger" th:if="${#fields.hasErrors('adressePostale')}"></p>
+
+        <button type="submit" class="btn btn-info col-2"> Save patient </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/showPatientList}" class="btn btn-secondary"> Back to patient List</a>
+</div>
+</body>
+
+</html>

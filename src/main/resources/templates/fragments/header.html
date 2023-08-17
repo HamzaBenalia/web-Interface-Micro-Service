@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+
+<div th:fragment="header">
+
+    <div class="row">
+        <div class="col-6">
+            <span class="h3">Mediscreen</span><br>
+            <a href="/showPatientList">Patients</a>&nbsp;|&nbsp;
+            <a href="/showNoteList">Notes</a>&nbsp;|&nbsp;
+            <a href="/reports/search">Reports</a>&nbsp;|&nbsp;
+        </div>
+    </div>
+</div>
+</body>
+</html>

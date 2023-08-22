@@ -24,6 +24,10 @@ public class NoteService {
         noteClient.createNote(note);
     }
 
+    /**
+     * This method is for getting a list of notes on the interface
+     * @return
+     */
     public List<NoteDto> getNotes(){
         List<Note> notes = noteClient.getNotes();
         List<String> patientIds = notes.stream().map(note -> note.getPatientId()).collect(Collectors.toList());
@@ -45,18 +49,37 @@ public class NoteService {
         return noteDtos;
     }
 
-    public void deleteNote(String id){
+    /**
+     * This method is for deleting a note on the interface
+     * @param id
+     */
+   public void deleteNote(String id){
         noteClient.deleteNote(id);
     }
 
+    /**
+     * This method is for getting a note via the id
+     * @param id
+     * @return
+     */
     public Optional<Note> findById(String id){
         return noteClient.getNote(id);
     }
 
+    /**
+     * This method is for updating a note via it's id
+     * @param id
+     * @param note
+     */
     public void updateNote(String id , Note note){
         noteClient.updateNote(id,note);
     }
 
+    /**
+     * This method is for deleting a note via the patient id
+     * Whenever a patient is being deleted, the note will be as well.
+     * @param patientId
+     */
    public void deleteNoteByPatientId(Integer patientId){
         noteClient.deleteNoteByPatientId(patientId);
    }

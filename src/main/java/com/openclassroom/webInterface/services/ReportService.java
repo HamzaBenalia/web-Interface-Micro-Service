@@ -1,6 +1,6 @@
 package com.openclassroom.webInterface.services;
 
-import com.medic.reports.model.Report;
+import com.openclassroom.webInterface.model.Report;
 import com.openclassroom.webInterface.model.Patient;
 import com.openclassroom.webInterface.proxy.PatientClient;
 import com.openclassroom.webInterface.proxy.ReportClient;
@@ -20,11 +20,20 @@ public class ReportService {
     @Autowired
     private PatientClient patientClient;
 
+    /**
+     * this method will get you the health report of a patient
+     * @param patientId
+     * @return
+     */
+
     public Report getReport(String patientId){
         return reportClient.getReport(patientId);
     }
 
-
+    /**
+     * This method will get you all reports of patients
+     * @return
+     */
     public List<Report> getAllReports() {
         List<Patient> patients = patientClient.getPatients();
         List<Report> reports = new ArrayList<>();
@@ -36,6 +45,11 @@ public class ReportService {
         return reports;
     }
 
+    /**
+     * This method is for getting a report by a patientName
+     * @param name
+     * @return
+     */
     public List<Report> getReportByPatientName(String name){
         List<Patient> patients = patientClient.getPatients(name);
 
@@ -45,6 +59,5 @@ public class ReportService {
         }
         return reports;
     }
-
 }
 

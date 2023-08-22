@@ -1,8 +1,9 @@
 package com.openclassroom.webInterface.controllers;
-import com.medic.reports.model.Report;
+import com.openclassroom.webInterface.model.Report;
 import com.openclassroom.webInterface.model.Patient;
 import com.openclassroom.webInterface.services.PatientService;
 import com.openclassroom.webInterface.services.ReportService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class ReportController {
         this.patientService = patientService;
     }
 
+    @Operation(
+            description = "Get a report by a patientName "
+    )
     @GetMapping("/reports/search-by-name")
     public String getReportsByName(@RequestParam String name, Model model) {
         this.hasSearch = true;
@@ -48,7 +52,9 @@ public class ReportController {
         return "reports/searchForm";
     }
 
-
+    @Operation(
+            description = "A form to look for a report"
+    )
     @GetMapping("/reports/search")
     public String searchReportsForm(Model model) {
         this.hasSearch = false;

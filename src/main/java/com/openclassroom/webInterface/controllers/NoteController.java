@@ -4,6 +4,7 @@ import com.openclassroom.webInterface.form.PatientForm;
 import com.openclassroom.webInterface.model.Note;
 import com.openclassroom.webInterface.model.Patient;
 import com.openclassroom.webInterface.services.NoteService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,9 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
-
+    @Operation(
+            description = "Show a registration form for a note"
+    )
     @GetMapping("/showNoteRegistration")
     public String showNewPatientForm(Model model) {
         // create model attribute to bind form data
@@ -34,11 +37,19 @@ public class NoteController {
         return "notes/addNote";
     }
 
+    @Operation(
+            description = "Show the list of notes"
+    )
+
     @GetMapping("/showNoteList")
     public String viewNoteHomePage(Model model) {
         model.addAttribute("listNote", noteService.getNotes());
         return "notes/noteHomePage";
     }
+
+    @Operation(
+            description = "save a note "
+    )
 
     @PostMapping("/saveNote")
     public String saveNote(@Valid @ModelAttribute("noteForm") NoteForm noteForm,
@@ -58,7 +69,9 @@ public class NoteController {
     }
 
 
-
+    @Operation(
+            description = "Show a form to update a note information"
+    )
     @GetMapping("/showFormForNoteUpdate/{id}")
     public String showFormForBidListUpdate(@PathVariable(value = "id") String id, Model model) {
         try {
@@ -75,6 +88,10 @@ public class NoteController {
             return "redirect:/bidListHomePage";
         }
     }
+
+    @Operation(
+            description = "update a note information"
+    )
 
     @PostMapping("/updateNote/{id}")
     public String updateNote(@PathVariable(value = "id") String id, @Valid @ModelAttribute("noteForm") NoteForm noteForm, BindingResult result) {
@@ -95,6 +112,10 @@ public class NoteController {
             return "notes/updateNote";
         }
     }
+
+    @Operation(
+            description = "Delete a note via it's id"
+    )
 
     @GetMapping("/deleteNote/{id}")
     public String deleteNote(@PathVariable(value = "id") String id) {

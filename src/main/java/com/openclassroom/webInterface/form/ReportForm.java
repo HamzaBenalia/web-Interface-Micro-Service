@@ -1,5 +1,5 @@
 package com.openclassroom.webInterface.form;
-import com.medic.reports.enums.Risk;
+import com.openclassroom.webInterface.enums.Risk;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;

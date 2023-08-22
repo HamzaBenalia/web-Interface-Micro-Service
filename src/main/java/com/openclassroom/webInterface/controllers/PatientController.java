@@ -4,6 +4,7 @@ import com.openclassroom.webInterface.model.Note;
 import com.openclassroom.webInterface.model.Patient;
 import com.openclassroom.webInterface.services.NoteService;
 import com.openclassroom.webInterface.services.PatientService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class PatientController {
     private NoteService noteService;
 
 
+    @Operation(
+            description = "Show a form to registrate a patient"
+    )
     @GetMapping("/showPatientRegistration")
     public String showNewPatientForm(Model model) {
         // create model attribute to bind form data
@@ -33,12 +37,19 @@ public class PatientController {
         return "patients/addPatient";
     }
 
+    @Operation(
+            description = "Show the list of registered patients"
+    )
+
     @GetMapping({"/showPatientList","/"})
     public String viewHomePage(Model model) {
         model.addAttribute("listPatient", patientService.getPatients());
         return "/patients/patientHomePage";
     }
 
+    @Operation(
+            description = "Save a patient"
+    )
     @PostMapping("/savePatient")
     public String savePatient(@Valid @ModelAttribute("patientForm") PatientForm patientForm,
                               BindingResult result, Model model) {
@@ -58,6 +69,9 @@ public class PatientController {
             return "redirect:/";
         }
 
+    @Operation(
+            description = "Show the form for updating a patient"
+    )
 
     @GetMapping("/showFormForPatientUpdate/{id}")
     public String showFormForPatientUpdate(@PathVariable(value = "id") Integer id, Model model) {
@@ -75,6 +89,10 @@ public class PatientController {
             return "redirect:/patients/patientHomePage";
         }
     }
+
+    @Operation(
+            description = "Update a patient"
+    )
 
     @PostMapping("/updatePatient/{id}")
     public String updatePatient(@PathVariable(value = "id") Integer id, @Valid @ModelAttribute("patientForm") PatientForm patientForm, BindingResult result) {
@@ -99,6 +117,9 @@ public class PatientController {
         }
     }
 
+    @Operation(
+            description = "Delete a patient via it's id"
+    )
 
     @GetMapping("/deletePatient/{id}")
     public String deletePatient(@PathVariable(value = "id") Integer id) {

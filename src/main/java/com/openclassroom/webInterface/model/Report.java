@@ -1,5 +1,5 @@
 package com.openclassroom.webInterface.model;
-import com.medic.reports.enums.Risk;
+import com.openclassroom.webInterface.enums.Risk;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Report {
-
 
     private String patientId;
 

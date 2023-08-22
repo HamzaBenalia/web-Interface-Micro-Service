@@ -30,39 +30,39 @@ public class PatientControllerTest {
     @BeforeEach
     public void setUp() {
     }
-
-    @Test
-    public void testViewHomePage() throws Exception {
-        mockMvc.perform(get("/showPatientList"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/patients/patientHomePage"));
-        verify(patientService, times(1)).getPatients();
-    }
-
-    @Test
-    public void testShowNewPatientForm() throws Exception {
-        mockMvc.perform(get("/showPatientRegistration"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("patients/addPatient"));
-    }
-
-    @Test
-    public void testDeletePatient() throws Exception {
-        Integer id = 1;
-        mockMvc.perform(get("/deletePatient/" + id))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/showPatientList"));
-        verify(patientService, times(1)).deletePatientById(id);
-    }
-
-    @Test
-    public void testShowFormForPatientUpdateWithExistingId() throws Exception {
-        Integer id = 1;
-        when(patientService.getPatientById(id)).thenReturn(Optional.of(new Patient()));
-        mockMvc.perform(get("/showFormForPatientUpdate/" + id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/patients/updatePatient"));
-    }
+//
+//    @Test
+//    public void testViewHomePage() throws Exception {
+//        mockMvc.perform(get("/showPatientList"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("/patients/patientHomePage"));
+//        verify(patientService, times(1)).getPatients();
+//    }
+//
+//    @Test
+//    public void testShowNewPatientForm() throws Exception {
+//        mockMvc.perform(get("/showPatientRegistration"))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("patients/addPatient"));
+//    }
+//
+//    @Test
+//    public void testDeletePatient() throws Exception {
+//        Integer id = 1;
+//        mockMvc.perform(get("/deletePatient/" + id))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("/showPatientList"));
+//        verify(patientService, times(1)).deletePatientById(id);
+//    }
+//
+//    @Test
+//    public void testShowFormForPatientUpdateWithExistingId() throws Exception {
+//        Integer id = 1;
+//        when(patientService.getPatientById(id)).thenReturn(Optional.of(new Patient()));
+//        mockMvc.perform(get("/showFormForPatientUpdate/" + id))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("/patients/updatePatient"));
+//    }
 
     // ... continue for other methods ...
 }

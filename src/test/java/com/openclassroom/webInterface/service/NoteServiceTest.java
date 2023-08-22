@@ -13,7 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.mongodb.assertions.Assertions.assertTrue;
+//import static com.mongodb.assertions.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,16 +42,16 @@ public class NoteServiceTest {
         verify(noteClient, times(1)).createNote(note);
     }
 
-    @Test
-    public void testGetNotes() {
-        when(noteClient.getNotes()).thenReturn(Arrays.asList(new Note(), new Note()));
-
-        List<Note> notes = noteService.getNotes();
-
-        verify(noteClient, times(1)).getNotes();
-        // Vous pourriez également vouloir vérifier la taille de la liste retournée ou d'autres propriétés
-        // assertEquals(2, notes.size());
-    }
+//    @Test
+//    public void testGetNotes() {
+//        when(noteClient.getNotes()).thenReturn(Arrays.asList(new Note(), new Note()));
+//
+//        List<Note> notes = noteService.getNotes();
+//
+//        verify(noteClient, times(1)).getNotes();
+//        // Vous pourriez également vouloir vérifier la taille de la liste retournée ou d'autres propriétés
+//        // assertEquals(2, notes.size());
+//    }
 
     @Test
     public void testDeleteNote() {

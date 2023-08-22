@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "${MONGO_DB_PORT}:${MONGO_DB_PORT}"
+    environment:
+      - MONGO_INITDB_DATABASE=note
+
+  note-app:
+    image: hamza3991/note:0.0.1
+    ports:
+      - "${NOTE_APP_PORT}:${NOTE_APP_PORT}"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:${MONGO_DB_PORT}/note
+    depends_on:
+      - mongodb
+
+#  spring.data.mongodb.database=Notes
+#  spring.data.mongodb.port=27017
+  mysqldb:
+    image: mysql:latest
+    ports:
+      - "${MYSQL_DB_PORT}:${MYSQL_DB_PORT}"
+    environment:
+      - Mysql_INITDB_DATABASE=patients
+
+  patient-app:
+    image: hamza3991/patient:0.0.1
+    ports:
+      - "${PATIENT_APP_PORT}:${PATIENT_APP_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:${MYSQL_DB_PORT}/patients
+    depends_on:
+      - mysqldb
+
+  report-app:
+    image: hamza3991/report:0.0.1
+    ports:
+      - "${REPORT_APP_PORT}:${REPORT_APP_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:${MYSQL_DB_PORT}/patients
+      - NOTE_URL=http://note-app:${NOTE_APP_PORT}
+      - PATIENT_URL=http://patient-app:${PATIENT_APP_PORT}
+    depends_on:
+      - patient-app
+      - note-app
+
+
+  webinterface-app:
+    image: hamza3991/webinterface:0.0.1
+    ports:
+      - "${WEBINTERFACE_APP_PORT}:${WEBINTERFACE_APP_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:${MYSQL_DB_PORT}/patients
+      - NOTE_URL=http://note-app:${NOTE_APP_PORT}
+      - PATIENT_URL=http://patient-app:${PATIENT_APP_PORT}
+    depends_on:
+      - patient-app
+      - note-app
+      - report_app
+
+
+
+

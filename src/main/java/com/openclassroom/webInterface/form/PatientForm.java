@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientForm {
-
-
     private String id;
     @NotBlank
     private String nom;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(name = "note", url = "http://localhost:9090")
+@FeignClient(name = "note", url = "${note.url}")
 
 public interface NoteClient {
 
@@ -30,8 +30,8 @@ public interface NoteClient {
     @GetMapping("/note/{id}")
     Optional<Note> getNote(@PathVariable String id);
 
-    @GetMapping("/note/update/{id}")
-    Note updateNote(@PathVariable String id, @RequestBody Note note);
+    @PutMapping("/note/update/{id}")
+    Note updateNote(@PathVariable("id") String id, @RequestBody Note note);
 
     @DeleteMapping("note/patient/{patientId}")
     void deleteNoteByPatientId(@PathVariable Integer patientId);

@@ -1,6 +1,8 @@
 package com.openclassroom.webInterface.form;
 import com.openclassroom.webInterface.enums.Risk;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,24 +17,17 @@ public class ReportForm {
     @NotBlank
     private String patientId;
     @NotBlank
-
     private String firstName;
     @NotBlank
-
     private String lastName;
     @NotBlank
-
     private String gender;
     @NotBlank
-
     private String birthdate;
-    @NotBlank
-
+    @NotNull
     private Integer age;
-    @NotBlank
-
+    @NotNull
     private Risk risk;
-    @NotBlank
-
+    @NotEmpty
     private List<String> triggers;
 }

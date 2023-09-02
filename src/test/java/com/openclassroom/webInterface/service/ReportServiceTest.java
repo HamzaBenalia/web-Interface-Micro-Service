@@ -7,9 +7,12 @@ import com.openclassroom.webInterface.proxy.ReportClient;
 import com.openclassroom.webInterface.services.ReportService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +22,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class ReportServiceTest {
 
 
@@ -30,7 +33,7 @@ public class ReportServiceTest {
     private PatientClient patientClient;
 
     @InjectMocks
-    private ReportService reportService;  // Supposons que le nom de votre service soit "ReportService".
+    private ReportService reportService;
 
     @BeforeEach
     public void setUp() {
@@ -39,6 +42,7 @@ public class ReportServiceTest {
 
     @Test
     public void testGetReport() {
+        Patient patient = new Patient(1,"benalia","hamza","16/05/1998","Homme","Toulosue","0755226633");
         String patientId = "123";
         Report mockReport = new Report();
         when(reportClient.getReport(patientId)).thenReturn(mockReport);
@@ -50,28 +54,29 @@ public class ReportServiceTest {
     }
 
 
-//    @Test
-//    public void testGetAllReports() {
-//        List<Patient> mockPatients = Arrays.asList(new Patient(), new Patient());
-//        when(patientClient.getPatients()).thenReturn(mockPatients);
-//        when(reportClient.getReport(anyString())).thenReturn(new Report());  // retourne un report mocké pour n'importe quelle ID
-//
-//        List<Report> reports = reportService.getAllReports();
-//
-//        assertEquals(mockPatients.size(), reports.size());
-//        verify(reportClient, times(mockPatients.size())).getReport(anyString());
-//    }
+    @Test
+    public void testGetAllReports() {
+        Patient patient = new Patient(1,"benalia","hamza","16/02/1885","Homme","","0788552266");
 
-//    @Test
-//    public void testGetReportByPatientName() {
-//        String name = "John";
-//        List<Patient> mockPatients = Arrays.asList(new Patient(), new Patient());
-//        when(patientClient.getPatients(name)).thenReturn(mockPatients);
-//        when(reportClient.getReport(anyString())).thenReturn(new Report());
-//
-//        List<Report> reports = reportService.getReportByPatientName(name);
-//
-//        assertEquals(mockPatients.size(), reports.size());
-//        verify(reportClient, times(mockPatients.size())).getReport(anyString());
-//    }
+        when(patientClient.getPatients()).thenReturn(Arrays.asList(patient));
+        when(reportClient.getReport(anyString())).thenReturn(new Report());
+
+        List<Report> reports = reportService.getAllReports();
+
+        assertEquals(Arrays.asList(patient).size(), reports.size());
+        verify(reportClient, times(Arrays.asList(patient).size())).getReport(anyString());
+    }
+
+    @Test
+    public void testGetReportByPatientName() {
+        String name = "John";
+        Patient patient = new Patient(1,name,"hamza","16/02/1885","Homme","","0788552266");
+        when(patientClient.getPatients(name)).thenReturn(Arrays.asList(patient));
+        when(reportClient.getReport(anyString())).thenReturn(new Report());
+
+        List<Report> reports = reportService.getReportByPatientName(name);
+
+        assertEquals(Arrays.asList(patient).size(), reports.size());
+        verify(reportClient, times(Arrays.asList(patient).size())).getReport(anyString());
+    }
 }

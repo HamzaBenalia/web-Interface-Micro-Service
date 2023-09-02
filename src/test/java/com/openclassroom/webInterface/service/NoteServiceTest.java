@@ -1,6 +1,10 @@
 package com.openclassroom.webInterface.service;
+import com.openclassroom.webInterface.dto.NoteDto;
+import com.openclassroom.webInterface.form.NoteForm;
 import com.openclassroom.webInterface.model.Note;
+import com.openclassroom.webInterface.model.Patient;
 import com.openclassroom.webInterface.proxy.NoteClient;
+import com.openclassroom.webInterface.proxy.PatientClient;
 import com.openclassroom.webInterface.services.NoteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,12 +13,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 //import static com.mongodb.assertions.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +33,9 @@ public class NoteServiceTest {
 
     @Mock
     private NoteClient noteClient;
+
+    @Mock
+    private PatientClient patientClient;
 
     @InjectMocks
     private NoteService noteService;  // Remplacez par le nom réel de votre service si ce n'est pas "NoteService".
@@ -42,16 +53,23 @@ public class NoteServiceTest {
         verify(noteClient, times(1)).createNote(note);
     }
 
-//    @Test
-//    public void testGetNotes() {
-//        when(noteClient.getNotes()).thenReturn(Arrays.asList(new Note(), new Note()));
-//
-//        List<Note> notes = noteService.getNotes();
-//
-//        verify(noteClient, times(1)).getNotes();
-//        // Vous pourriez également vouloir vérifier la taille de la liste retournée ou d'autres propriétés
-//        // assertEquals(2, notes.size());
-//    }
+
+    @Test
+    public void testGetNotes() {
+        Note note = new Note("1", LocalDate.now(),"1","content");
+        Patient patient = new Patient(1,"benalia","hamza","16/05/1998","Homme","Toulouse","0766752255");
+        List<Note> mockedNotes = Arrays.asList(note);
+        List<Patient> mockedPatients = Arrays.asList(patient);
+
+        when(noteClient.getNotes()).thenReturn(mockedNotes);
+        when(patientClient.getPatientByIds(anyList())).thenReturn(mockedPatients);
+
+        List<NoteDto> result = noteService.getNotes();
+
+        assertNotNull(result);
+        assertEquals(mockedNotes.size(), result.size());
+    }
+
 
     @Test
     public void testDeleteNote() {

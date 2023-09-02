@@ -36,9 +36,6 @@
 
     <form action="#" th:action="@{/saveNote}" th:object="${noteForm}" method="POST">
 
-        <input type="text" th:field="*{id}" placeholder="Id" class="form-control mb-4 col-4">
-
-
         <input type="text" th:field="*{patientId}" placeholder="PatientId" class="form-control mb-4 col-4">
         <p th:errors="*{patientId}" class="text-danger" th:if="${#fields.hasErrors('patientId')}"></p>
 

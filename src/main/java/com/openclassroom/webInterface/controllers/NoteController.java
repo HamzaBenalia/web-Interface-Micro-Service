@@ -3,6 +3,7 @@ import com.openclassroom.webInterface.form.NoteForm;
 import com.openclassroom.webInterface.form.PatientForm;
 import com.openclassroom.webInterface.model.Note;
 import com.openclassroom.webInterface.model.Patient;
+import com.openclassroom.webInterface.proxy.PatientClient;
 import com.openclassroom.webInterface.services.NoteService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -26,11 +27,14 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private PatientClient patientClient;
+
     @Operation(
             description = "Show a registration form for a note"
     )
     @GetMapping("/showNoteRegistration")
-    public String showNewPatientForm(Model model) {
+    public String showNewNoteForm(Model model) {
         // create model attribute to bind form data
         NoteForm noteForm = new NoteForm();
         model.addAttribute("noteForm", noteForm);
@@ -54,15 +58,17 @@ public class NoteController {
     @PostMapping("/saveNote")
     public String saveNote(@Valid @ModelAttribute("noteForm") NoteForm noteForm,
                               BindingResult result, Model model) {
-
+        try {
+            Optional<Patient> optionalPatient = patientClient.getPatient(Integer.valueOf(noteForm.getPatientId()));
+        } catch (Exception exception){
+            result.rejectValue("patientId", "", "Patient unfound");
+        }
         if (result.hasErrors()) {
             return "notes/addNote";
         }
-
         Note note = new Note();
         note.setPatientId(noteForm.getPatientId());
-        LocalDate date = LocalDate.now();
-        note.setDate(date);
+        note.setDate(LocalDate.now());
         note.setContent(noteForm.getContent());
         noteService.createNote(note);
         return "redirect:/showNoteList";
@@ -73,7 +79,7 @@ public class NoteController {
             description = "Show a form to update a note information"
     )
     @GetMapping("/showFormForNoteUpdate/{id}")
-    public String showFormForBidListUpdate(@PathVariable(value = "id") String id, Model model) {
+    public String showFormForNoteUpdate(@PathVariable(value = "id") String id, Model model) {
         try {
             Optional<Note> noteOpt = noteService.findById(id);
             if (noteOpt.isPresent()) {
@@ -95,6 +101,11 @@ public class NoteController {
 
     @PostMapping("/updateNote/{id}")
     public String updateNote(@PathVariable(value = "id") String id, @Valid @ModelAttribute("noteForm") NoteForm noteForm, BindingResult result) {
+        try {
+            Optional<Patient> optionalPatient = patientClient.getPatient(Integer.valueOf(noteForm.getPatientId()));
+        } catch (Exception exception){
+            result.rejectValue("patientId", "", "Patient unfound");
+        }
         if (result.hasErrors()) {
             return "notes/updateNote";
         }

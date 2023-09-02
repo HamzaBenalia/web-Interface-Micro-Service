@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(name = "patients", url = "http://localhost:8080")
+@FeignClient(name = "patients", url = "${patient.url}")
 public interface PatientClient {
 
     @PostMapping("/patient")
@@ -23,18 +23,18 @@ public interface PatientClient {
     List<Patient> getPatients();
 
     @DeleteMapping("patient/delete/{id}")
-    String delete(@PathVariable Integer id);
+    String delete(@PathVariable("id") Integer id);
 
 
     @GetMapping("patient/find/{nom}")
-    List<Patient> getPatients(@PathVariable String nom);
+    List<Patient> getPatients(@PathVariable("nom") String nom);
 
     @GetMapping("patient/findByPatientIds")
     List<Patient> getPatientByIds(@RequestParam List<String> patientIds);
 
     @GetMapping("patient/{id}")
-    Optional<Patient> getPatient(@PathVariable Integer id);
+    Optional<Patient> getPatient(@PathVariable("id") Integer id);
 
-    @PostMapping("patient/update/{id}")
-    public Patient updatePatient(@PathVariable Integer id, @RequestBody Patient patient);
+    @PutMapping("patient/update/{id}")
+    public Patient updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient);
 }

@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoteForm {
-    @NotBlank
+
     private String id;
-    @NotBlank
+    @NotBlank(message = "le patient id est obligatoire")
     private String patientId;
-    @NotBlank
+    @NotBlank (message = "le content est obligatoire")
     private String content;
 }

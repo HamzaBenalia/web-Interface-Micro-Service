@@ -44,7 +44,7 @@ public class PatientController {
     @GetMapping({"/showPatientList","/"})
     public String viewHomePage(Model model) {
         model.addAttribute("listPatient", patientService.getPatients());
-        return "/patients/patientHomePage";
+        return "patients/patientHomePage";
     }
 
     @Operation(
@@ -80,7 +80,7 @@ public class PatientController {
             if (patientOpt.isPresent()) {
                 Patient patient = patientOpt.get();
                 model.addAttribute("patientForm", patient);
-                return "/patients/updatePatient";
+                return "patients/updatePatient";
             } else {
                 return "redirect:/patients/patientHomePage";
             }

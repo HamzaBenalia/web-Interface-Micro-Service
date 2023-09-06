@@ -24,20 +24,17 @@ The web interface communicates with each of the micro-services to show you all n
 
 
 ## Architecture
-L'application est basée sur une architecture micro-services comprenant les services suivants:
+The application is based on a micro-services architecture comprising the following services:
 
-Patients - Écoute sur le port 8080.
-Notes - Écoute sur le port 9090.
-Reports - Écoute sur le port 9091.
-User Interface - Écoute sur le port 9092. C'est par ce service que les utilisateurs interagissent avec le système (UI).
+Patients - Listening on port 8080. Notes - Listening on port 9090. Reports - Listening on port 9091. User Interface - Listening on port 9092. This is the service through which users interact with the system (UI).
 
 
 ## Prérequis
-Docker installé sur votre machine.
-Git installé sur votre machine.
+Docker installed on your machine.
+Git installed on your machine.
 
 ### Étapes d'installation
-Cloner le dépôt:
+Clone the repository:
 
 ![clone repo](https://github.com/HamzaBenalia/web-Interface-Micro-Service/assets/99022185/24a0c881-c0e0-45c1-8e8a-295f205a1d43)
 
@@ -93,6 +90,6 @@ Cloner le dépôt:
 
 
 ###Support 
-Pour tout problème, question ou suggestion, veuillez créer une issue sur ce dépôt GitHub ou contactez-moi à [hamzabenalia93@gmail.com].
+For any issues, questions, or suggestions, please create an issue on this GitHub repository or contact me at [hamzabenalia93@gmail.com].
 
     

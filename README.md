@@ -67,22 +67,21 @@ Cloner le dépôt:
     ```
 
     **Now you should be connected to the MySQL service**. Paste the following SQL file into your terminal : 
-    ```sql :
+    ```sql
      DROP TABLE IF EXISTS `Patients`;
-    CREATE TABLE Patients (
-  Id int NOT NULL AUTO_INCREMENT,
-  nom VARCHAR(125),
-  prenom VARCHAR(125),
-   date_de_naissance VARCHAR(125),
-   genre VARCHAR(125),
-   addresse_postale VARCHAR(125),
-   numero_de_telephone VARCHAR(125),
-
+    CREATE TABLE `Patients` (
+    Id int NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(125),
+    prenom VARCHAR(125),
+    date_de_naissance VARCHAR(125),
+    genre VARCHAR(125),
+    addresse_postale VARCHAR(125),
+    numero_de_telephone VARCHAR(125),
   PRIMARY KEY (Id)
 );
 ```
 
-   Check if the table has been created using : 
+Check if the table has been created using : 
     ```shell
     > SHOW TABLES;
     ```
@@ -92,7 +91,7 @@ Cloner le dépôt:
 
 
 
-### Support
+###Support
 
 Pour tout problème, question ou suggestion, veuillez créer une issue sur ce dépôt GitHub ou contactez-moi à [hamzabenalia93@gmail.com].
 

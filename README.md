@@ -67,7 +67,7 @@ Cloner le dépôt:
     ```
 
     **Now you should be connected to the MySQL service**. Paste the following SQL file into your terminal : 
-    ```shell
+    ```
     sql
      DROP TABLE IF EXISTS `Patients`;
     CREATE TABLE `Patients` (
@@ -86,7 +86,7 @@ Cloner le dépôt:
  Check if the table has been created using : 
  ```shell
     > SHOW TABLES;
-
+   ```
 
     If the creation is successful, you should see the `patients` table in the resulting output.
     The application should be running on

@@ -54,8 +54,6 @@ Cloner le dépôt:
 
 
 
-
-    ```
 2. When every images are pulled, you have to create the `patients` table in the MySQL service 
 
     ```shell
@@ -82,6 +80,7 @@ Cloner le dépôt:
 
   PRIMARY KEY (Id)
 );
+```
 
    Check if the table has been created using : 
     ```shell

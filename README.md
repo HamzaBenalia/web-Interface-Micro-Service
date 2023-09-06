@@ -63,12 +63,11 @@ Cloner le dépôt:
 
     ```shell
     > mysql -u root -proot
-    > use abernathyclinic;
+    > use Patients;
     ```
 
     **Now you should be connected to the MySQL service**. Paste the following SQL file into your terminal : 
-    ```
-    sql
+    ```sql
      DROP TABLE IF EXISTS `Patients`;
     CREATE TABLE `Patients` (
     Id int NOT NULL AUTO_INCREMENT,

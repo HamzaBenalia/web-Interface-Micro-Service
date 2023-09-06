@@ -67,7 +67,8 @@ Cloner le dépôt:
     ```
 
     **Now you should be connected to the MySQL service**. Paste the following SQL file into your terminal : 
-    ```sql
+    ```shell
+    sql
      DROP TABLE IF EXISTS `Patients`;
     CREATE TABLE `Patients` (
     Id int NOT NULL AUTO_INCREMENT,
@@ -79,22 +80,20 @@ Cloner le dépôt:
     numero_de_telephone VARCHAR(125),
   PRIMARY KEY (Id)
 );
- 
+  ```
  
 
  Check if the table has been created using : 
- ```
+ ```shell
     > SHOW TABLES;
 
 
     If the creation is successful, you should see the `patients` table in the resulting output.
     The application should be running on
-     **[http://localhost:9092](http://localhost:9092)**.
+     **[http://localhost:9092](http://localhost:9092)**. ```
 
 
-
-###Support
-
+###Support 
 Pour tout problème, question ou suggestion, veuillez créer une issue sur ce dépôt GitHub ou contactez-moi à [hamzabenalia93@gmail.com].
 
     

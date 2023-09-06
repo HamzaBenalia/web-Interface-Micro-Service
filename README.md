@@ -79,15 +79,16 @@ Cloner le dépôt:
     numero_de_telephone VARCHAR(125),
   PRIMARY KEY (Id)
 );
-```
+ ```
 
-Check if the table has been created using : 
-    ```shell
+ Check if the table has been created using : 
+
     > SHOW TABLES;
-    ```
+
 
     If the creation is successful, you should see the `patients` table in the resulting output.
-    The application should be running on **[http://localhost:9092](http://localhost:9092)**.
+    The application should be running on
+     **[http://localhost:9092](http://localhost:9092)**.
 
 
 

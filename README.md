@@ -55,11 +55,10 @@ Cloner le dépôt:
 
 
 2. When every images are pulled, you have to create the `patients` table in the MySQL service
-    ```
-    ```
+   
     ```shell
     > docker compose exec mysql /bin/bash/
-    ```
+    
     then
 
     ```shell
@@ -80,11 +79,11 @@ Cloner le dépôt:
     numero_de_telephone VARCHAR(125),
   PRIMARY KEY (Id)
 );
- ```
- ```
+ 
+ 
 
  Check if the table has been created using : 
-
+ ```
     > SHOW TABLES;
 
 

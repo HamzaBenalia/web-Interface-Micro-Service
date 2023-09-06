@@ -80,7 +80,7 @@ Cloner le dépôt:
   PRIMARY KEY (Id)
 );
  ```
-
+ ```
  Check if the table has been created using : 
 
     > SHOW TABLES;
